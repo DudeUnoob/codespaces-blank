@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LandDev Co. - Transforming Landscapes, Building Futures</title>
+    <title>Terra Nova. - Transforming Landscapes, Building Futures</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- The widget script will be loaded after the page is fully loaded -->
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Load the widget script after the React app has initialized -->
+    <script src="/widget-fallback.js" defer></script>
   </body>
 </html>

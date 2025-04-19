@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terra Nova Chat</title>
+  <style>
+    body, html { 
+      margin: 0; 
+      padding: 0; 
+      height: 100%; 
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background-color: white;
+    }
+    #root { 
+      width: 100%; 
+      height: 100%; 
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: #4D7AE8;
+      color: white;
+    }
+    header h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: calc(100% - 45px);
+    }
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: #4D7AE8;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h3>Terra Nova Chat</h3>
+    <button class="close-btn" onclick="window.close()">&times;</button>
+  </header>
+  <div id="root">
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>Loading chat...</div>
+    </div>
+  </div>
+  <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load the widget script
+      const script = document.createElement('script');
+      script.onload = function() {
+        if (window.myChatWidget && typeof window.myChatWidget.load === 'function') {
+          try {
+            window.myChatWidget.load({
+              id: 'c7b1c99b-62ce-40fe-a799-9dc049a69182'
+            });
+          } catch (err) {
+            console.error('Widget initialization error:', err);
+            document.getElementById('root').innerHTML = 
+              '<div style="padding: 20px; text-align: center; color: #666;">Error initializing chat widget</div>';
+          }
+        } else {
+          document.getElementById('root').innerHTML = 
+            '<div style="padding: 20px; text-align: center; color: #666;">Widget API not available</div>';
+        }
+      };
+      
+      script.onerror = function() {
+        document.getElementById('root').innerHTML = 
+          '<div style="padding: 20px; text-align: center; color: #666;">Failed to load chat widget</div>';
+      };
+      
+      script.src = "https://agentivehub.com/production.bundle.min.js";
+      document.body.appendChild(script);
+    });
+  </script>
+</body>
+</html> 
